@@ -1,0 +1,209 @@
+========================================================
+📒 RECAP - JAVASCRIPT BÁSICO (Resumo de Estudos)
+Lorenzo Correa - Preparação entrevista Roxcode
+========================================================
+
+SUMÁRIO
+1. Fundamentos (Variáveis e Tipos)
+2. Concatenação (Juntando Textos)
+3. Indexação de String (Acessando Caracteres)
+4. Operadores
+5. Controle de Fluxo (Decisões e Loops)
+6. Estruturas de Dados (Arrays e Objetos)
+7. Funções
+8. JavaScript no Navegador (DOM)
+
+
+========================================================
+1. 🧠 FUNDAMENTOS (Variáveis e Tipos de Dados)
+========================================================
+A base de como o JavaScript armazena e entende informações.
+
+Declaração de variáveis:
+  let    -> variável que PODE ter o valor alterado (padrão moderno)
+  const  -> "constante", NÃO pode ser reatribuída (use sempre que possível)
+  var    -> forma antiga (evite; prefira let ou const)
+
+Tipos de dados primitivos:
+  String     -> texto, sempre entre aspas. Ex: "Olá, mundo"
+  Number     -> números inteiros e decimais. Ex: 10, 3.14
+  Boolean    -> verdadeiro ou falso: true / false
+  null       -> ausência INTENCIONAL de valor
+  undefined  -> variável declarada mas sem valor atribuído
+
+========================================================
+2. 🛠️ OPERADORES
+========================================================
+
+Aritméticos:
+  +  (soma)   
+  -  (subtração) 
+  *  (multiplicação)
+  /  (divisão) 
+  %  (resto da divisão)
+
+Atribuição:
+  =  significa RECEBE. Ex: let idade = 25;
+                          "let idade RECEBE 25"
+
+Comparação:
+  ===  estritamente igual (compara valor E tipo) -> PREFIRA ESTE
+  !==  estritamente diferente
+  ==   igual só no valor, converte tipos -> EVITE
+  >    maior que        <    menor que
+  >=   maior ou igual   <=   menor ou igual
+
+Lógicos:
+
+  &&  (E / AND)  -> true se AMBOS os lados forem verdadeiros
+  ||  (OU / OR)  -> true se PELO MENOS UM lado for verdadeiro
+  !   (NÃO / NOT) -> inverte o booleano (!true vira false)
+
+
+
+========================================================
+3. 🔗 CONCATENAÇÃO (Juntando Textos)
+========================================================
+
+Forma 1 - Operador + (antiga):
+  Você precisa adicionar os espaços manualmente.
+
+Forma 2 - Template Strings (moderna, RECOMENDADA):
+  Usa crase (`) em vez de aspas e ${} para inserir variáveis.
+  Mais limpa e fácil de ler.
+
+Exemplo:
+  let nome = "Lorenzo";
+  let sobrenome = "Correa";
+
+  // Operador +
+  let nomeCompleto1 = nome + " " + sobrenome;
+
+  // Template String (recomendada)
+  let nomeCompleto2 = `${nome} ${sobrenome}`;
+
+  console.log(nomeCompleto2); // "Lorenzo Correa"
+
+
+========================================================
+4. 🔢 INDEXAÇÃO DE STRING (Acessando Caracteres)
+========================================================
+
+REGRA DE OURO: computadores começam a contar do ZERO.
+Uma String é como uma lista de caracteres numerados.
+
+  Palavra:  J  A  V  A
+  Índice:   0  1  2  3
+
+Sintaxe: colchetes [ ] logo após a variável.
+
+  const texto = "JavaScript";
+
+  console.log(texto[0]);  // "J" (primeira letra, índice 0)
+  console.log(texto[4]);  // "S" (quinta letra, índice 4)
+
+  // DICA NINJA: pegando a ÚLTIMA letra
+  // O último índice é sempre o tamanho (length) menos 1.
+  console.log(texto[texto.length - 1]);  // "t"
+
+
+
+========================================================
+5. 🔀 CONTROLE DE FLUXO (Decisões e Loops)
+========================================================
+
+Condicionais (if / else):
+  if (idade >= 18 && idade < 26) {
+    console.log("Pode entrar na festa!");
+  } else {
+    console.log("Não pode entrar!");
+  }
+
+Loop for -> quando você SABE quantas vezes repetir:
+  for (let i = 0; i < 5; i++) {
+    // este código roda 5 vezes
+  }
+
+Loop while -> quando você NÃO sabe quantas vezes,
+mas sabe a condição de parada:
+  while (condicao) {
+    // roda enquanto a condição for verdadeira
+  }
+
+
+========================================================
+6. 📦 ESTRUTURAS DE DADOS (Arrays e Objetos)
+========================================================
+
+Array (lista) -> coleção ORDENADA, acessada por índice (começa em 0):
+  const meusProjetos = ['Portfólio', 'Calculadora', 'App do Clima'];
+  meusProjetos[0];        // 'Portfólio'
+  meusProjetos.length;    // 3
+
+Object (objeto) -> pares chave: valor. Descreve uma "coisa"/entidade:
+  const projeto1 = {
+    titulo: 'Meu Portfólio',
+    tecnologia: 'HTML/CSS',
+    ano: 2025
+  };
+  projeto1.titulo;   // 'Meu Portfólio'
+
+
+========================================================
+7. ⚙️ FUNÇÕES
+========================================================
+Blocos de código reutilizáveis que executam uma tarefa.
+
+Declaração clássica:
+  function somar(a, b) {
+    return a + b;
+  }
+
+Arrow Function (moderna - ES6, muito comum em React):
+  const somar = (a, b) => {
+    return a + b;
+  };
+
+  // Ou mais curta ainda (retorno implícito):
+  const somarCurta = (a, b) => a + b;
+
+return -> "devolve" um valor de dentro da função
+          para quem a chamou.
+
+
+========================================================
+8. 🌐 JAVASCRIPT NO NAVEGADOR (DOM)
+========================================================
+DOM (Document Object Model): representação do HTML
+como um objeto JavaScript.
+
+  document -> objeto global que representa a página.
+
+Selecionando elementos:
+  document.querySelector(seletor)
+    -> O MAIS USADO. Retorna o PRIMEIRO elemento que bate
+       com o seletor CSS ('.minhaClasse', '#meuId', 'button')
+  document.querySelectorAll(seletor)
+    -> Retorna TODOS os elementos (uma lista)
+  document.getElementById(id)
+    -> Seleciona pelo ID
+
+Manipulando elementos:
+  elemento.textContent          -> lê/altera o texto interno
+  elemento.innerHTML            -> lê/altera o HTML interno
+  elemento.style.propriedade    -> altera CSS inline
+                                   (ex: elemento.style.color = 'red')
+  elemento.classList.add('x')    -> adiciona classe CSS
+  elemento.classList.remove('x') -> remove classe CSS
+  elemento.classList.toggle('x') -> alterna a classe (liga/desliga)
+
+Reagindo a eventos:
+  elemento.addEventListener('evento', funcao)
+    -> "escuta" uma ação do usuário e executa a função
+
+  Eventos comuns: 'click', 'submit' (formulários), 'mouseover'
+
+
+========================================================
+FIM DO RECAP - Bons estudos! 🚀
+========================================================
