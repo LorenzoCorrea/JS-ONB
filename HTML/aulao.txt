@@ -1,0 +1,3 @@
+O que é HTML e CSS
+- HTML: Constroi a estrutura (Coloca audio, video, texto... Na TELA)
+- CSS: Deixa bonito a estrutura 
