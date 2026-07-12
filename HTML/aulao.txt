@@ -1,3 +1,9 @@
 O que é HTML e CSS
 - HTML: Constroi a estrutura (Coloca audio, video, texto... Na TELA)
 - CSS: Deixa bonito a estrutura 
+
+
+=-=-=-=-=
+O que são tags?
+São informações para o HTML, por exemplo 
+<h1> Titulo </h1>
