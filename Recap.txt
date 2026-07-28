@@ -12,6 +12,7 @@ SUMÁRIO
 6. Estruturas de Dados (Arrays e Objetos)
 7. Funções
 8. JavaScript no Navegador (DOM)
+9. Entrada e Saída (o "input" do Python no JS)
 
 
 ========================================================
@@ -196,6 +197,56 @@ Reagindo a eventos:
     -> "escuta" uma ação do usuário e executa a função
 
   Eventos comuns: 'click', 'submit' (formulários), 'mouseover'
+
+
+========================================================
+9. ⌨️ ENTRADA E SAÍDA (o "input" do Python no JS)
+========================================================
+Tabela de equivalência Python -> JavaScript (navegador):
+
+  Python                      JavaScript
+  ------------------------    ---------------------------
+  nome = input("Nome: ")      const nome = prompt("Nome: ")
+  print("Olá")                console.log("Olá")
+  int(input("Idade: "))       Number(prompt("Idade: "))
+
+prompt() -> abre uma caixinha no NAVEGADOR pedindo um
+valor pro usuário, igual ao input() do Python.
+
+  const nome = prompt("Qual seu nome?");
+  console.log(`Olá, ${nome}!`);
+
+⚠️ REGRA DE OURO (igual ao Python!):
+prompt() SEMPRE devolve STRING, mesmo que o usuário
+digite um número. Pra fazer contas, converta com Number()
+(o equivalente do int() / float() do Python):
+
+  const valor1 = Number(prompt("Digite o primeiro número:"));
+  const valor2 = Number(prompt("Digite o segundo número:"));
+
+  console.log(`Soma: ${valor1 + valor2}`);   // conta certa ✅
+
+  // SEM o Number():
+  // "2" + "3" = "23"  ❌ (cola as strings em vez de somar!)
+
+Outras formas de mostrar dados na tela:
+  console.log(x) -> imprime no console (F12 no navegador)
+  alert(x)       -> abre uma caixinha de aviso na tela
+  document.querySelector(...).textContent = x
+                 -> escreve direto na página (via DOM)
+
+⚠️ prompt() e alert() só existem no NAVEGADOR (página
+HTML). Se rodar o arquivo direto pelo Node (terminal),
+eles não existem — no Node a leitura é feita com o módulo
+readline (assunto mais avançado, fica pra depois).
+
+Programa completo de exemplo (junta tudo):
+
+  const nome = prompt("Seu nome:");
+  const anoNascimento = Number(prompt("Ano de nascimento:"));
+  const idade = 2026 - anoNascimento;
+
+  console.log(`${nome} tem ${idade} anos`);
 
 
 ========================================================
