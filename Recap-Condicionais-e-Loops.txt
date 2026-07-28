@@ -1,0 +1,349 @@
+========================================================
+📒 RECAP DETALHADO - CONDICIONAIS (IF/ELSE) E LOOPS
+JavaScript Básico - Bloco 5 destrinchado
+========================================================
+
+SUMÁRIO
+1. if / else if / else
+2. Truthy e Falsy (o que o if considera verdadeiro)
+3. Operador Ternário (if de uma linha)
+4. switch (alternativa ao if com muitos casos)
+5. Loop for
+6. Loop while
+7. Loop do...while
+8. for...of (percorrer arrays)
+9. for...in (percorrer objetos)
+10. break e continue (controlando o loop)
+11. Padrões comuns (exemplos práticos)
+12. Erros clássicos de iniciante
+
+
+========================================================
+1. IF / ELSE IF / ELSE
+========================================================
+Executa blocos diferentes de código conforme uma condição.
+
+Estrutura completa:
+
+  if (condicao1) {
+    // roda se condicao1 for verdadeira
+  } else if (condicao2) {
+    // roda se condicao1 for falsa E condicao2 verdadeira
+  } else {
+    // roda se NENHUMA das anteriores for verdadeira
+  }
+
+Exemplo real:
+
+  const nota = 7.5;
+
+  if (nota >= 9) {
+    console.log("Excelente!");
+  } else if (nota >= 7) {
+    console.log("Aprovado");        // <- cai aqui
+  } else if (nota >= 5) {
+    console.log("Recuperação");
+  } else {
+    console.log("Reprovado");
+  }
+
+REGRAS IMPORTANTES:
+- O JS testa as condições DE CIMA PARA BAIXO e para na
+  PRIMEIRA que for verdadeira. A ordem importa!
+- else if e else são OPCIONAIS. Pode existir if sozinho.
+- Combine condições com && (E) e || (OU):
+
+  if (idade >= 18 && temIngresso) { ... }
+  if (ehSocio || ehConvidado) { ... }
+
+
+========================================================
+2. TRUTHY E FALSY
+========================================================
+O if converte qualquer valor para booleano. Valores que
+viram false são chamados FALSY. Decore os 6 principais:
+
+  false      -> o próprio false
+  0          -> número zero
+  ""         -> string vazia
+  null       -> ausência intencional
+  undefined  -> variável sem valor
+  NaN        -> "Not a Number" (conta inválida)
+
+TODO O RESTO é TRUTHY (vira true), inclusive:
+  "0" (string com zero), [] (array vazio), {} (objeto vazio)
+
+Uso prático - verificar se algo foi preenchido:
+
+  const nome = "";
+
+  if (nome) {
+    console.log(`Olá, ${nome}`);
+  } else {
+    console.log("Preencha seu nome!");   // <- cai aqui
+  }
+
+
+========================================================
+3. OPERADOR TERNÁRIO (if de uma linha)
+========================================================
+Sintaxe:  condicao ? valorSeVerdadeiro : valorSeFalso
+
+  const idade = 20;
+  const status = idade >= 18 ? "maior de idade" : "menor de idade";
+  console.log(status);   // "maior de idade"
+
+Equivale a um if/else, mas cabe numa linha e pode ser
+usado DENTRO de uma atribuição ou template string:
+
+  console.log(`Você é ${idade >= 18 ? "maior" : "menor"}`);
+
+DICA: use ternário só para escolhas simples entre 2 valores.
+Se tiver mais de uma condição, prefira if/else normal
+(ternário aninhado fica ilegível).
+
+
+========================================================
+4. SWITCH
+========================================================
+Alternativa ao if/else if quando você compara UMA variável
+contra VÁRIOS valores fixos.
+
+  const diaSemana = 3;
+
+  switch (diaSemana) {
+    case 1:
+      console.log("Domingo");
+      break;
+    case 2:
+      console.log("Segunda");
+      break;
+    case 3:
+      console.log("Terça");    // <- cai aqui
+      break;
+    default:
+      console.log("Dia inválido");
+  }
+
+REGRAS:
+- O break é OBRIGATÓRIO no fim de cada case. Sem ele, o
+  código "vaza" e executa os cases seguintes também.
+- default = o "else" do switch (roda se nenhum case bater).
+- A comparação do switch é estrita (===).
+
+
+========================================================
+5. LOOP FOR
+========================================================
+Use quando você SABE quantas vezes quer repetir.
+
+Anatomia:
+  for (inicio; condicao; incremento) { ... }
+
+  for (let i = 0; i < 5; i++) {
+    console.log(`Volta número ${i}`);
+  }
+  // Imprime: 0, 1, 2, 3, 4  (5 voltas, começando do 0)
+
+Lendo em voz alta:
+  "Crie i valendo 0; ENQUANTO i for menor que 5,
+   execute o bloco; ao fim de cada volta, some 1 em i."
+
+Percorrendo um array com for clássico:
+
+  const frutas = ["maçã", "banana", "uva"];
+
+  for (let i = 0; i < frutas.length; i++) {
+    console.log(`${i}: ${frutas[i]}`);
+  }
+  // 0: maçã / 1: banana / 2: uva
+
+VARIAÇÕES ÚTEIS:
+  i++      -> soma 1 (mais comum)
+  i += 2   -> pula de 2 em 2
+  i--      -> conta de trás pra frente:
+  for (let i = 10; i >= 0; i--) { ... }  // contagem regressiva
+
+
+========================================================
+6. LOOP WHILE
+========================================================
+Use quando você NÃO sabe quantas vezes vai repetir,
+mas sabe a CONDIÇÃO DE PARADA.
+
+  let vidas = 3;
+
+  while (vidas > 0) {
+    console.log(`Você tem ${vidas} vidas`);
+    vidas--;   // IMPORTANTE: algo precisa mudar a condição!
+  }
+  console.log("Game over");
+
+⚠️ CUIDADO - LOOP INFINITO:
+Se a condição nunca ficar falsa, o loop trava o programa.
+Sempre garanta que algo DENTRO do loop altera a condição
+(no exemplo, o vidas--).
+
+
+========================================================
+7. LOOP DO...WHILE
+========================================================
+Igual ao while, mas executa o bloco PELO MENOS UMA VEZ
+antes de testar a condição (o teste fica no final).
+
+  let senha;
+
+  do {
+    senha = prompt("Digite a senha:");
+  } while (senha !== "1234");
+
+Uso típico: pedir entrada do usuário até ser válida —
+precisa pedir ao menos uma vez, por isso do...while.
+
+
+========================================================
+8. FOR...OF (percorrer ARRAYS - moderno)
+========================================================
+Percorre os VALORES de um array direto, sem precisar de
+índice. Mais limpo que o for clássico quando você não
+precisa do número da posição.
+
+  const frutas = ["maçã", "banana", "uva"];
+
+  for (const fruta of frutas) {
+    console.log(fruta);
+  }
+  // maçã / banana / uva
+
+Também funciona com strings (letra por letra):
+
+  for (const letra of "JS") {
+    console.log(letra);   // J / S
+  }
+
+Quando usar cada um:
+  precisa do índice?        -> for clássico
+  só precisa dos valores?   -> for...of
+
+
+========================================================
+9. FOR...IN (percorrer OBJETOS)
+========================================================
+Percorre as CHAVES de um objeto.
+
+  const projeto = {
+    titulo: "Portfólio",
+    tecnologia: "HTML/CSS",
+    ano: 2025
+  };
+
+  for (const chave in projeto) {
+    console.log(`${chave}: ${projeto[chave]}`);
+  }
+  // titulo: Portfólio
+  // tecnologia: HTML/CSS
+  // ano: 2025
+
+MACETE PRA NÃO CONFUNDIR:
+  for...OF -> Objetos não! (arrays e strings - valores)
+  for...IN -> chaves de objetos (IN = dentro das chaves)
+
+
+========================================================
+10. BREAK E CONTINUE
+========================================================
+break    -> ENCERRA o loop imediatamente.
+continue -> PULA a volta atual e vai pra próxima.
+
+  for (let i = 1; i <= 10; i++) {
+    if (i === 5) {
+      break;      // para tudo no 5
+    }
+    console.log(i);
+  }
+  // 1, 2, 3, 4
+
+  for (let i = 1; i <= 5; i++) {
+    if (i === 3) {
+      continue;   // pula só o 3
+    }
+    console.log(i);
+  }
+  // 1, 2, 4, 5
+
+
+========================================================
+11. PADRÕES COMUNS (exemplos práticos)
+========================================================
+
+Somar todos os números de um array:
+
+  const precos = [10, 25, 30];
+  let total = 0;
+
+  for (const preco of precos) {
+    total += preco;
+  }
+  console.log(total);   // 65
+
+Contar quantos passam num filtro:
+
+  const notas = [4, 7, 9, 5, 8];
+  let aprovados = 0;
+
+  for (const nota of notas) {
+    if (nota >= 7) {
+      aprovados++;
+    }
+  }
+  console.log(aprovados);   // 3
+
+Buscar um item e parar quando achar:
+
+  const nomes = ["Ana", "Bruno", "Carla"];
+
+  for (const nome of nomes) {
+    if (nome === "Bruno") {
+      console.log("Achei o Bruno!");
+      break;   // já achou, não precisa continuar
+    }
+  }
+
+Par ou ímpar (usando % - resto da divisão):
+
+  for (let i = 1; i <= 10; i++) {
+    if (i % 2 === 0) {
+      console.log(`${i} é par`);
+    } else {
+      console.log(`${i} é ímpar`);
+    }
+  }
+
+
+========================================================
+12. ERROS CLÁSSICOS DE INICIANTE
+========================================================
+
+1. Usar = (atribuição) em vez de === (comparação):
+   if (idade = 18)   ❌ atribui 18 à variável!
+   if (idade === 18) ✅ compara
+
+2. Esquecer de atualizar a condição no while:
+   while (x < 10) { console.log(x); }  ❌ loop infinito
+   while (x < 10) { console.log(x); x++; }  ✅
+
+3. Errar o limite do for (off-by-one):
+   for (let i = 0; i <= frutas.length; i++)  ❌ passa 1 do fim
+   for (let i = 0; i < frutas.length; i++)   ✅
+   (índices vão de 0 até length - 1)
+
+4. Esquecer o break no switch:
+   os cases seguintes executam junto sem querer.
+
+5. Confundir for...of com for...in:
+   of = valores (arrays) / in = chaves (objetos).
+
+
+========================================================
+FIM - Condicionais e Loops dominados! 🔀🔁
+========================================================
